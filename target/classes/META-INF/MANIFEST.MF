@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Build-Jdk-Spec: 18
+Class-Path: opencsv-5.5.2.jar commons-lang3-3.12.0.jar commons-text-1.9.
+ jar commons-beanutils-1.9.4.jar commons-logging-1.2.jar commons-collect
+ ions-3.2.2.jar commons-collections4-4.4.jar
+Main-Class: com.example.MainClass
+Created-By: Maven Integration for Eclipse
+
