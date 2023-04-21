@@ -134,7 +134,19 @@ public class Csv {
         return juga;
     }
 
-  
+    public ConfigData leerConfig() throws IOException {
+        ConfigData config = new ConfigData(0,0,0);
+            try (BufferedReader reader = Files.newBufferedReader(this.ruta)) {
+                String line;
+                    while ((line = reader.readLine()) != null) {
+                        String[] data = line.split(",");
+                        ConfigData configTemp = new ConfigData(Integer.parseInt(data[0]), Integer.parseInt(data[1]), Integer.parseInt(data[2]));
+                        config = configTemp;
+            }
+                    
+        } return config;
+    
+    }
 	
     
     

@@ -430,6 +430,85 @@ public class Menu {
         	
         	
         }
+
+        public static void cargarPuntosSQL(String ruta, int pAcierto, int eRonda, int eFase) throws Exception{
+        	Scanner leer = new Scanner(System.in);
+                int puntos = 0;
+                int cAciertos = 0;
+                int cFases = 0;
+        	int idJugador;
+            Csv archivoPart = new Csv("C:\\UTN\\Partidos.csv");
+            Csv archivoJuga = new Csv("C:\\UTN\\jugadores.csv");
+            try {
+            List<Pronos> pronosticos = Sql.leerPronSQL(ruta, "root", "ratata128"); // Cambiar aquí por su correspondiente user/Password.
+            List<Partidos> partidos = archivoPart.leerPartidos();
+            List<jugador> jugadores = archivoJuga.leerJugadores();
+            for (int i = 0; i<jugadores.size(); i++) {
+            	puntos = 0;
+            	idJugador = jugadores.get(i).getId();
+            	for (int j = 0; j<pronosticos.size(); j++) {
+            		if (pronosticos.get(j).getIdJugador() == idJugador) {
+            			for (int k=0; k<pronosticos.get(j).getrPartidos().length();k++){
+               				    if (Integer.parseInt(String.valueOf(pronosticos.get(j).getrPartidos().charAt(k))) == partidos.get(k).getEPartido()) {
+            					puntos = puntos + pAcierto;  
+                                cAciertos = cAciertos + 1;                                                
+            				}
+                                            if (k+1 == 16 || k+1 == 32 || k+1 == 48){
+                                            if (cAciertos == 16){
+                                            puntos =puntos + eRonda;
+                                            cFases = cFases + 1;
+                                            }
+                                            if (k+1 == 48){
+                                              if (cFases == 3){
+                                                  puntos = puntos + eFase;
+                                                 
+                                            }
+                                             cFases = 0;
+                                            }
+                                             cAciertos = 0;
+                                            }
+                                            
+                                            if ( k+1 == 56){
+                                            	if (cAciertos == 8){
+                                                    puntos = puntos + eRonda;
+                                                    puntos = puntos + eFase;
+                                                    
+                                                    }
+                                              cAciertos = 0;
+                                              }
+                                            
+                                            if(k+1 == 60){
+                                              if (cAciertos == 4){
+                                              puntos = puntos + eRonda;
+                                              puntos = puntos + eFase;
+                                              }
+                                              cAciertos = 0;
+                                            }
+                                            if (k+1 == 62 || k+1 == 64){
+                                            if (cAciertos == 2){
+                                            puntos = puntos + eRonda;
+                                            puntos = puntos + eFase;
+                                            }
+                                           cAciertos = 0;
+                                        }
+            			}
+
+            		}
+            		
+            	}
+            	jugadores.get(i).setPuntosJ(puntos);
+            	cAciertos = 0;
+            }
+            archivoJuga.escJugadores(jugadores);
+            System.out.println();
+            System.out.println("Puntos asignados correctamente. Enter para continuar");
+            leer.nextLine();
+            } catch (IOException e) {
+            	System.out.println(e.getMessage());
+            }
+            leer.close();
+        }
+
 }
 
 
