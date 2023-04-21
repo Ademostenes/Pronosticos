@@ -1,0 +1,5 @@
+Equipos: id(int), descripcion(String).
+jugador: id(int), dni(int), nombre(String),apellido(String), puntos(int).
+Partidos: id(int), ronda(int),idEquipo1(int), idEquipo2(int),golesEquipo1(int), golesEquipo2(int),estadoPartido(int : 0(empate)- 1(Gana1) - 2(Gana2)).
+Pronos: id(int), idJugador(int),resultados(String : Cadena de estado de cada partido. En el ejemplo, son 64 caracteres, correspondientes a cada partido del mundial).
+Config: p1(int - Puntos por acierto), p2(int - puntos extra por ronda), p3(int - Puntos extra por fase).

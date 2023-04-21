@@ -1,0 +1,2 @@
+En caso de corresponder, los archivos del presente RAR, deben ser
+extraídos en C:\UTN\ (Crear directorio si es necesario).
